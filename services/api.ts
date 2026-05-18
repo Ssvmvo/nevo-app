@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Troque pelo IP do seu PC quando testar no celular
 // Ex: 'http://192.168.1.100:8000'
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://nevo-backend-1z31.onrender.com';
 
 const api = axios.create({ baseURL: BASE_URL, timeout: 30000 });
 
