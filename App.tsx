@@ -13,8 +13,9 @@ import { AnalysisResult } from './services/api';
 type Screen = 'loading' | 'login' | 'register' | 'home' | 'scan' | 'result' | 'history';
 
 export default function App() {
-  const [screen, setScreen]   = useState<Screen>('loading');
-  const [result, setResult]   = useState<AnalysisResult | null>(null);
+  const [screen, setScreen] = useState<Screen>('loading');
+  const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [image,  setImage]  = useState<string | null>(null);
 
   useEffect(() => {
     AsyncStorage.getItem('nevo_token').then(token => {
@@ -31,11 +32,24 @@ export default function App() {
   );
 
   if (screen === 'login')    return <LoginScreen    onLogin={() => go('home')} onRegister={() => go('register')} />;
-  if (screen === 'register') return <RegisterScreen onBack={() => go('login')}  onSuccess={() => go('login')} />;
-  if (screen === 'home')     return <HomeScreen     onScan={() => go('scan')}   onHistory={() => go('history')} onLogout={() => go('login')} />;
-  if (screen === 'scan')     return <ScanScreen     onBack={() => go('home')}   onResult={r => { setResult(r); go('result'); }} />;
-  if (screen === 'result' && result) return <ResultScreen result={result} onBack={() => go('home')} onNewScan={() => go('scan')} onHistory={() => go('history')} />;
-  if (screen === 'history')  return <HistoryScreen  onBack={() => go('home')} />;
+  if (screen === 'register') return <RegisterScreen onBack={() => go('login')} onSuccess={() => go('login')} />;
+  if (screen === 'home')     return <HomeScreen     onScan={() => go('scan')}  onHistory={() => go('history')} onLogout={() => go('login')} />;
+  if (screen === 'scan')     return (
+    <ScanScreen
+      onBack={() => go('home')}
+      onResult={(r, img) => { setResult(r); setImage(img ?? null); go('result'); }}
+    />
+  );
+  if (screen === 'result' && result) return (
+    <ResultScreen
+      result={result}
+      image={image}
+      onBack={() => go('home')}
+      onNewScan={() => go('scan')}
+      onHistory={() => go('history')}
+    />
+  );
+  if (screen === 'history')  return <HistoryScreen onBack={() => go('home')} />;
   return null;
 }
 
