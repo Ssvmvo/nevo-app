@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-'''export const BASE_URL = 'https://tightwad-startup-womanlike.ngrok-free.dev';'''
-const BASE_URL = "NgrokTunnel: "https://tightwad-startup-womanlike.ngrok-free.dev" -> "http://localhost:8000"";
+export const BASE_URL = 'https://tightwad-startup-womanlike.ngrok-free.dev';
 
 export interface User {
   id: number; name: string; email: string; role: string;
