@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const BASE_URL = 'https://tightwad-startup-womanlike.ngrok-free.dev';
+export const BASE_URL = '3DskDiv68DikRsdqUIpXCe1mClZ_2dGJ2VCLu9LkqpCC93TmU';
 
 export interface User {
   id: number; name: string; email: string; role: string;
